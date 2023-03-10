@@ -23,7 +23,7 @@ const Home: NextPage = () => {
            <Heading as="h1" size="l" color="white" ml={4} mt={8}>
              Popular Articles
            </Heading>
-           <MovieList />
+           <ArticleList />
          </Box>
        </Center>
      </div>
