@@ -1,9 +1,9 @@
 import { Box, HStack, Spacer, Stack, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-import { Movie } from '../models/Movie';
+import { Article } from '../models/Article';
 
 export interface CardProps {
-    movie: Movie;
+    article: Article;
 }
 
 export const Card: FC<CardProps> = (props) => {
@@ -31,17 +31,17 @@ export const Card: FC<CardProps> = (props) => {
                         letterSpacing="wide"
                         color="gray.200"
                     >
-                        {props.movie.title}
+                        {props.article.title}
                     </Text>
                     <Spacer />
                     <Text
                         color="gray.200"
                     >
-                        {props.movie.rating}/5
+                        {props.article.rating}/5
                     </Text>
                 </HStack>
                 <Text my={2} color="gray.400">
-                    {props.movie.description}
+                    {props.article.description}
                 </Text>
             </Stack>
         </Box>

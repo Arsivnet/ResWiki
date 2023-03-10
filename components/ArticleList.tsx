@@ -2,23 +2,23 @@ import { Card } from './Card'
 import { FC, useEffect, useMemo, useState } from 'react'
 import { Movie } from '../models/Movie'
 import * as web3 from '@solana/web3.js'
-import { MovieCoordinator } from '../coordinators/MovieCoordinator'
+import { ArticleCoordinator } from '../coordinators/ArticleCoordinator'
 import { Button, Center, HStack, Input, Spacer } from '@chakra-ui/react'
 
-export const MovieList: FC = () => {
+export const ArticleList: FC = () => {
     const connection = new web3.Connection(web3.clusterApiUrl('devnet'))
-    const [movies, setMovies] = useState<Movie[]>([])
+    const [articles, setArticles] = useState<Article[]>([])
     const [page, setPage] = useState(1)
     const [search, setSearch] = useState('')
 
     useEffect(() => {
-        MovieCoordinator.fetchPage(
+        ArticleCoordinator.fetchPage(
             connection, 
             page, 
             5,
             search,
             search !== ''
-        ).then(setMovies)
+        ).then(setArticles)
     }, [page, search])
     
     return (
@@ -35,7 +35,7 @@ export const MovieList: FC = () => {
                 />
             </Center>
             {
-                movies.map((movie, i) => <Card key={i} movie={movie} /> )
+                articles.map((article, i) => <Card key={i} article={article} /> )
             }
             <Center>
                 <HStack w='full' mt={2} mb={8} ml={4} mr={4}>
@@ -44,7 +44,7 @@ export const MovieList: FC = () => {
                     }
                     <Spacer />
                     {
-                        MovieCoordinator.accounts.length > page * 5 &&
+                        ArticleCoordinator.accounts.length > page * 5 &&
                         <Button onClick={() => setPage(page + 1)}>Next</Button>
                     }
                 </HStack>

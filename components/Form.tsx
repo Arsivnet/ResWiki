@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Movie } from '../models/Movie'
+import { Article } from '../models/Article'
 import { useState } from 'react'
 import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Textarea } from '@chakra-ui/react'
 import * as web3 from '@solana/web3.js'
@@ -17,21 +17,21 @@ export const Form: FC = () => {
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
-        const movie = new Movie(title, rating, description)
-        handleTransactionSubmit(movie)
+        const article = new Article(title, rating, description)
+        handleTransactionSubmit(article)
     }
 
-    const handleTransactionSubmit = async (movie: Movie) => {
+    const handleTransactionSubmit = async (article: Article) => {
         if (!publicKey) {
             alert('Please connect your wallet!')
             return
         }
 
-        const buffer = movie.serialize()
+        const buffer = article.serialize()
         const transaction = new web3.Transaction()
 
         const [pda] = await web3.PublicKey.findProgramAddress(
-            [publicKey.toBuffer(), Buffer.from(movie.title)],// new TextEncoder().encode(movie.title)],
+            [publicKey.toBuffer(), Buffer.from(article.title)],// new TextEncoder().encode(article.title)],
             new web3.PublicKey(MOVIE_REVIEW_PROGRAM_ID)
         )
 
@@ -81,44 +81,22 @@ export const Form: FC = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl isRequired>
                     <FormLabel color='gray.200'>
-                        Movie Title
-                    </FormLabel>
+                        Search
+                        </FormLabel>
                     <Input
-                        id='title'
-                        color='gray.400'
-                        onChange={event => setTitle(event.currentTarget.value)}
-                    />
-                </FormControl>
-                <FormControl isRequired>
-                    <FormLabel color='gray.200'>
-                        Add your review
-                    </FormLabel>
-                    <Textarea
-                        id='review'
-                        color='gray.400'
-                        onChange={event => setDescription(event.currentTarget.value)}
-                    />
-                </FormControl>
-                <FormControl isRequired>
-                    <FormLabel color='gray.200'>
-                        Rating
-                    </FormLabel>
-                    <NumberInput
-                        max={5}
-                        min={1}
-                        onChange={(valueString) => setRating(parseInt(valueString))}
-                    >
-                        <NumberInputField id='amount' color='gray.400' />
-                        <NumberInputStepper color='gray.400'>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
+                    id='title'
+                    color='gray.400'
+                    onChange={event => setTitle(event.currentTarget.value)}
+                />
                 </FormControl>
                 <Button width="full" mt={4} type="submit">
-                    Submit Review
+                    Search
+                </Button>
+                <Button width="full" mt={4} type="submit">
+                    I feel lucky
                 </Button>
             </form>
         </Box>
     );
 }
+

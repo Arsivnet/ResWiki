@@ -1,10 +1,10 @@
 import bs58 from 'bs58'
 import * as web3 from '@solana/web3.js'
-import { Movie } from '../models/Movie'
+import { Article } from '../models/Article'
 
 const MOVIE_REVIEW_PROGRAM_ID = 'CenYq6bDRB7p73EjsPEpiYN7uveyPUTdXkDkgUduboaN'
 
-export class MovieCoordinator {
+export class ArticleCoordinator {
     static accounts: web3.PublicKey[] = []
 
     static async prefetchAccounts(connection: web3.Connection, search: string) {
@@ -35,7 +35,7 @@ export class MovieCoordinator {
         this.accounts = accounts.map(account => account.pubkey)
     }
 
-    static async fetchPage(connection: web3.Connection, page: number, perPage: number, search: string, reload: boolean = false): Promise<Movie[]> {
+    static async fetchPage(connection: web3.Connection, page: number, perPage: number, search: string, reload: boolean = false): Promise<Article[]> {
         if (this.accounts.length === 0 || reload) {
             await this.prefetchAccounts(connection, search)
         }
@@ -51,15 +51,15 @@ export class MovieCoordinator {
 
         const accounts = await connection.getMultipleAccountsInfo(paginatedPublicKeys)
 
-        const movies = accounts.reduce((accum: Movie[], account) => {
-            const movie = Movie.deserialize(account?.data)
-            if (!movie) {
+        const articles = accounts.reduce((accum: Article[], account) => {
+            const article = Article.deserialize(account?.data)
+            if (!article) {
                 return accum
             }
 
-            return [...accum, movie]
+            return [...accum, article]
         }, [])
 
-        return movies
+        return articles
     }
 }
