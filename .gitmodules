@@ -1,0 +1,3 @@
+[submodule "src/program"]
+	path = src/program
+	url = https://github.com/buildspace/solana-movie-program.git
