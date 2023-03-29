@@ -23,12 +23,12 @@ pub fn process_instruction(
 ) -> ProgramResult {
     let instruction = ArticleInstruction::unpack(instruction_data)?;
     match instruction {
-        ArticleInstruction::AddArticleReview {
+        ArticleInstruction::AddArticle {
             title,
             rating,
             description,
         } => add_article_review(program_id, accounts, title, rating, description),
-        ArticleInstruction::UpdateArticleReview {
+        ArticleInstruction::UpdateArticle {
             title,
             rating,
             description,
