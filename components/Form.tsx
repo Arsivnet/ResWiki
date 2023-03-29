@@ -81,7 +81,7 @@ export const Form: FC = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl isRequired>
                     <FormLabel color='gray.200'>
-                        Movie Title
+                        Article Title
                     </FormLabel>
                     <Input
                         id='title'
@@ -91,7 +91,7 @@ export const Form: FC = () => {
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel color='gray.200'>
-                        Add your review
+                        Add the context
                     </FormLabel>
                     <Textarea
                         id='review'
@@ -116,7 +116,7 @@ export const Form: FC = () => {
                     </NumberInput>
                 </FormControl>
                 <Button width="full" mt={4} type="submit">
-                    Submit Review
+                    Submit Article
                 </Button>
             </form>
         </Box>
