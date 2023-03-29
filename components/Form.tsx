@@ -5,7 +5,7 @@ import { Box, Button, FormControl, FormLabel, Input, NumberDecrementStepper, Num
 import * as web3 from '@solana/web3.js'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 
-const MOVIE_REVIEW_PROGRAM_ID = 'CenYq6bDRB7p73EjsPEpiYN7uveyPUTdXkDkgUduboaN'
+const MOVIE_REVIEW_PROGRAM_ID = '2RLstbdoryEXD8gVmJ2LduiXXSMSYiuUXH7hCmk2aB7D'
 
 export const Form: FC = () => {
     const [title, setTitle] = useState('')
@@ -81,19 +81,42 @@ export const Form: FC = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl isRequired>
                     <FormLabel color='gray.200'>
-                        Search
-                        </FormLabel>
+                        Movie Title
+                    </FormLabel>
                     <Input
-                    id='title'
-                    color='gray.400'
-                    onChange={event => setTitle(event.currentTarget.value)}
-                />
+                        id='title'
+                        color='gray.400'
+                        onChange={event => setTitle(event.currentTarget.value)}
+                    />
+                </FormControl>
+                <FormControl isRequired>
+                    <FormLabel color='gray.200'>
+                        Add your review
+                    </FormLabel>
+                    <Textarea
+                        id='review'
+                        color='gray.400'
+                        onChange={event => setDescription(event.currentTarget.value)}
+                    />
+                </FormControl>
+                <FormControl isRequired>
+                    <FormLabel color='gray.200'>
+                        Rating
+                    </FormLabel>
+                    <NumberInput
+                        max={5}
+                        min={1}
+                        onChange={(valueString) => setRating(parseInt(valueString))}
+                    >
+                        <NumberInputField id='amount' color='gray.400' />
+                        <NumberInputStepper color='gray.400'>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                        </NumberInputStepper>
+                    </NumberInput>
                 </FormControl>
                 <Button width="full" mt={4} type="submit">
-                    Search
-                </Button>
-                <Button width="full" mt={4} type="submit">
-                    I feel lucky
+                    Submit Review
                 </Button>
             </form>
         </Box>
