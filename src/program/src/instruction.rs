@@ -37,7 +37,7 @@ impl ArticleInstruction {
         Ok(match variant {
             0 => {
                 let payload = ArticleReviewPayload::try_from_slice(rest).unwrap();
-                Self::AddArticleReview {
+                Self::AddArticle {
                     title: payload.title,
                     rating: payload.rating,
                     description: payload.description,
@@ -45,7 +45,7 @@ impl ArticleInstruction {
             }
             1 => {
                 let payload = ArticleReviewPayload::try_from_slice(rest).unwrap();
-                Self::UpdateArticleReview {
+                Self::UpdateArticle {
                     title: payload.title,
                     rating: payload.rating,
                     description: payload.description,
